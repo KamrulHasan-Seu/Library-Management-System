@@ -4,21 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Embeddable
 @Entity
-public class Book {
+public class StudentRole {
     @Id
-    private String bookId;
-    private String bookName;
-    @OneToMany
-    private List<Author> authorlist;
-    private String category;
-
+    private String roleId;
+    @Enumerated
+    private RoleType roleType;
+    private String password;
 }
