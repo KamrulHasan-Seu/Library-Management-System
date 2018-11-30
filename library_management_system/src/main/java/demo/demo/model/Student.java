@@ -11,19 +11,24 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Entity
-public class Student {
+public class Student extends Profile {
     @Id
     private String studId;
-    private String image;
-    private String name;
-    private String address;
-    private String email;
-    @Embedded
-    private StudentRole role;
     @OneToOne
     private Department dept;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @Enumerated
+    private RoleType roleType;
+    private String password;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Book> bookList;
 
 
+    public Student(String image, String name, String address, String email, String studId, Department dept, RoleType roleType, String password, Set<Book> bookList) {
+        super(image, name, address, email);
+        this.studId = studId;
+        this.dept = dept;
+        this.roleType = roleType;
+        this.password = password;
+        this.bookList = bookList;
+    }
 }

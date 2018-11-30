@@ -40,7 +40,7 @@ public class BookController {
     }
     @PostMapping(value = "save")
     @ResponseBody
-    public ResponseEntity<?> saveSeries(@RequestBody Book book){
+    public ResponseEntity<?> saveBook(@RequestBody Book book){
         Optional<Book> OptionalBook= bookService.findBookById(book.getBookId());
 
         if (OptionalBook.isPresent()){
@@ -63,7 +63,8 @@ public class BookController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Does not Exist");
         }
 
-        optional.get().setName(book.getName());
+        optional.get().setBookName(book.getBookName());
+        optional.get().setAuthorlist(book.getAuthorlist());
         optional.get().setCategory(book.getCategory());
 
         try {

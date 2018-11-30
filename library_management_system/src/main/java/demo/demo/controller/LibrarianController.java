@@ -41,7 +41,7 @@ public class LibrarianController {
     @PostMapping(value = "save")
     @ResponseBody
     public ResponseEntity<?> saveLibrarian(@RequestBody Librarian librarian) {
-        Optional<Librarian> OptionalLibrarian = librarianService.findLibrarianById(librarian.getLibraryId());
+        Optional<Librarian> OptionalLibrarian = librarianService.findLibrarianById(librarian.getLibrarianId());
 
         if (OptionalLibrarian.isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Librarian already exist");

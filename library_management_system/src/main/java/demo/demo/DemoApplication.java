@@ -1,11 +1,9 @@
 package demo.demo;
 
 
+import demo.demo.model.Author;
 import demo.demo.model.Librarian;
-import demo.demo.service.BookService;
-import demo.demo.service.DepartmentService;
-import demo.demo.service.LibrarianService;
-import demo.demo.service.StudentService;
+import demo.demo.service.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -20,7 +18,8 @@ public class DemoApplication {
         DepartmentService departmentService = run.getBean(DepartmentService.class);
         LibrarianService librarianService = run.getBean(LibrarianService.class);
         StudentService studentService = run.getBean(StudentService.class);
+        AuthorService authorService = run.getBean(AuthorService.class);
 
-        new InsertClass(bookService,departmentService,librarianService,studentService);
+        new InsertClass(bookService,departmentService,librarianService,studentService,authorService);
     }
 }

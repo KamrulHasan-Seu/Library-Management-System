@@ -1,13 +1,8 @@
 package demo.demo;
 
-import demo.demo.model.Book;
-import demo.demo.model.Department;
-import demo.demo.model.Librarian;
-import demo.demo.model.Student;
-import demo.demo.service.BookService;
-import demo.demo.service.DepartmentService;
-import demo.demo.service.LibrarianService;
-import demo.demo.service.StudentService;
+import demo.demo.model.*;
+import demo.demo.repository.AuthorRepository;
+import demo.demo.service.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,34 +14,44 @@ public class InsertClass {
     private DepartmentService departmentService;
     private LibrarianService librarianService;
     private StudentService studentService;
+    private AuthorService authorService;
 
-    public InsertClass(BookService bookService, DepartmentService departmentService,
-                       LibrarianService librarianService, StudentService studentService) {
+    public InsertClass(BookService bookService, DepartmentService departmentService, LibrarianService librarianService, StudentService studentService, AuthorService authorService) {
         this.bookService = bookService;
         this.departmentService = departmentService;
         this.librarianService = librarianService;
         this.studentService = studentService;
+        this.authorService = authorService;
 
         Set<Book> bookSet = new HashSet<>();
+        Set<Author> authorList = new HashSet<>();
 
         Department department = new Department("CSE", "Computer Science and Engineering", 39);
-        Student student = new Student("Kamrul", "KamrulImage", "Kamrul Hasan", "Mouchak,Kaliakoir,Gazipur",
-                "kh317325@gmail.com", department, bookSet);
-        Librarian librarian = new Librarian("Shamim", "Md Shamim", "MdShamim@gmail.com");
-        Book book = new Book("Java", "Learn with java", "Programming");
+        Category category = new Category("Programming","Programming");
+        Student student = new Student("KamrulImage","Kamrul Hasan","Gazipur",
+                "Kh317325@gmail.com","kamrul",department,RoleType.STUDENT,"Kamrul123",
+                bookSet);
+        Librarian librarian = new Librarian("ShamimImage","Md .shahmim","dhaka",
+                "shamim@gmail.com","Shamim",RoleType.ADMIN,"Shamim123");
 
+        Author author = new Author("Author1","Rajon");
+        Book book = new Book("Java","Learn Java",authorList,category);
 
+        bookSet.add(book);
+        authorList.add(author);
+
+        authorService.saveAuthor(author);
         bookService.saveBook(book);
         departmentService.saveDepartment(department);
         studentService.saveStudent(student);
         librarianService.saveLibrarian(librarian);
 
-        bookSet.add(book);
 
+
+        System.out.println("Inserted Author:" + author);
         System.out.println("Inserted Dept :" + department);
         System.out.println("Inserted Student :" + student);
         System.out.println("Inserted Librarian :" + librarian);
         System.out.println("Inserted Book :" + book);
     }
-
 }

@@ -5,15 +5,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-public class Librarian {
+public class Librarian extends Profile{
     @Id
-    private String LibraryId;
-    private String name;
-    private String email;
+    private String LibrarianId;
+    @Enumerated
+    private RoleType roleType;
+    private String librarianPassword;
+
+    public Librarian(String image, String name, String address, String email, String librarianId, RoleType roleType, String librarianPassword) {
+        super(image, name, address, email);
+        LibrarianId = librarianId;
+        this.roleType = roleType;
+        this.librarianPassword = librarianPassword;
+    }
 }
